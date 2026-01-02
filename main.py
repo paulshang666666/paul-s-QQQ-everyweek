@@ -71,7 +71,7 @@ class AutoBot:
                 val = self.state['shares'] * price
                 self.state['cash'] += val
                 self.state['shares'] = 0
-                self.state['history"].append(f"{today}: 清仓卖出 @ {price}")
+                self.state['history'].append(f"{today}: 清仓卖出 @ {price}")
                 
             elif pe <= 34:
                 # 定投买入
