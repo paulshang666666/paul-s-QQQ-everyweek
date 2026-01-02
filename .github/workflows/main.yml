@@ -1,0 +1,45 @@
+name: QQQ Weekly Auto Trade
+
+# 触发条件：
+# 1. schedule: 定时运行 (cron 语法)
+# 2. workflow_dispatch: 允许手动点击按钮测试
+on:
+  schedule:
+    # 格式: 分 时 日 月 周
+    # 下面表示：每周一 UTC时间 13:00 (北京时间晚上9点) 运行
+    - cron: '0 13 * * 1'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1. 下载仓库代码到虚拟环境
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. 安装 Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      # 3. 安装依赖库
+      - name: Install dependencies
+        run: |
+          pip install yfinance pandas
+
+      # 4. 运行你的策略代码
+      - name: Run trading bot
+        run: python main.py
+
+      # 5. 把更新后的 json 账本上传回仓库 (关键步骤)
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "actions@github.com"
+          git add portfolio_status.json
+          # 如果有变动才提交，没变动就不报错
+          git commit -m "Auto-update portfolio status" || echo "No changes to commit"
+          git push
