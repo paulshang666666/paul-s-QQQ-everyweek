@@ -1,8 +1,13 @@
 {
-    "cash": 0,
-    "shares": 0,
-    "total_invested": 0,
-    "last_pe": 33.66623,
-    "funded_years": [],
-    "history": []
+    "cash": 9800,
+    "shares": 0.319693107105191,
+    "total_invested": 10000,
+    "last_pe": 33.82247,
+    "funded_years": [
+        2026
+    ],
+    "history": [
+        "2026-02-02: \u5e74\u5ea6\u5145\u503c +$10,000",
+        "2026-02-02: \u4e70\u5165 0.3197\u80a1 @ 625.5999755859375"
+    ]
 }
